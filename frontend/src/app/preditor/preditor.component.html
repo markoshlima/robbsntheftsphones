@@ -1,0 +1,128 @@
+
+<div class="jumbotron">
+    <h1 class="display-6">Predição de Furto/Roubo de Celulares na Cidade de São Paulo</h1>
+    <p class="lead">Modelo de Machine Learning para prever a probabilidade do local de Roubo/Furto baseado em seu perfil e destino</p>
+    <hr class="my-4">
+    <p>Escolha as opções abaixo e clique em prever</p>
+
+    <form [formGroup]="predictForm" (ngSubmit)="onSubmit()" style="background-color:white; padding:20px; border-radius: 10px;">
+        
+        <div class="row" style="margin:10px">
+            <div class="col-2 text-right">Nome: </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName="nome">
+            </div>
+        </div>
+
+        <div class="row" style="margin:10px">
+            <div class="col-2 text-right">Bairro:</div>
+            <div class="col">
+                <select class="form-control" formControlName="bairro">
+                    <option disabled value="null">Selecione o bairro em que vai</option>
+                    <option *ngFor="let item of bairros" [value]="item">{{ item }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" style="margin:10px">
+            <div class="col-2 text-right">Dia da Semana:</div>
+            <div class="col">
+                <select class="form-control" formControlName="dia">
+                    <option disabled value="null">Selecione o dia da semana em que estara no bairro acima</option>
+                    <option *ngFor="let item of dias" [value]="item">{{ item }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" style="margin:10px">
+            <div class="col-2 text-right">Período:</div>
+            <div class="col">
+                <select class="form-control" formControlName="periodo">
+                    <option disabled value="null">Selecione o período em que estará no local</option>
+                    <option *ngFor="let item of periodos" [value]="item">{{ item }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" style="margin:10px">
+            <div class="col-2 text-right">Marca Celular:</div>
+            <div class="col">
+                <select class="form-control" formControlName="marca">
+                    <option disabled value="null">Selecione a marca de celular que possui</option>
+                    <option *ngFor="let item of marcas" [value]="item">{{ item | uppercase}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" style="margin:10px">
+            <div class="col-2 text-right">Idade: </div>
+            <div class="col">
+                <input type="number" class="form-control" formControlName="idade" />
+            </div>
+        </div>
+
+        <div class="row" style="margin:10px">
+            <div class="col-2 text-right">Sexo:</div>
+            <div class="col">
+                <select class="form-control" formControlName="sexo">
+                    <option disabled value="null">Selecione o seu sexo</option>
+                    <option *ngFor="let item of sexos" [value]="item">{{ item }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" style="margin:10px">
+            <div class="col-2"> </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Prever</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div style="padding:25px" [hidden]="!showPredict">
+
+   <div class="alert alert-danger" role="alert">
+        {{msgAlert}}<br />
+        Abaixo outras probabilidades baseada em seu perfil:
+    </div>
+    <br />
+    <div class="row" style="margin:10px" *ngFor="let item of prediction">
+        <div class="col-4 text-right">{{ item.label }} 
+            <button type="button" class="btn" data-toggle="modal" data-target="#modalExp" style="padding:5px" (click)="showInfo(item)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                  </svg>
+            </button>
+        </div>
+        <div class="col">
+            <div class="progress" style="height: 36px;">
+                <div [ngClass]="item.position == 9 ? 'progress-bar bg-danger' : item.position == 0 || item.position == 1 || item.position == 2 ? 'progress-bar bg-success' : 'progress-bar'" role="progressbar" [style.width]="item.value + '%'">{{ item.value }} %</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalExp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">{{itemSelected.label}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            {{itemSelected.desc}} são exemplos de {{itemSelected.label}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
