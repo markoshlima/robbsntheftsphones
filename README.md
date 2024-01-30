@@ -5,7 +5,7 @@ The project aims to create an algorithm or Machine Learning model to predict rob
 # **Notebook to create the model**
 
 To arrive at this model for predicting cell phone robbery and theft in the city of São Paulo, it was necessary to previously obtain the data from the website of the public security department of the state of São Paulo.
-To carry out the data study, transformation, training and model generation, Jupyter Lab's Jupyter Notebook in version 4.0.5 was used and [this link contains the notebook used to create the model] (https://raw.githubusercontent.com/markoshlima/robbsntheftsphones/main/notebooks/celulares-roubo-furto.ipynb).
+To carry out the data study, transformation, training and model generation, Jupyter Lab's Jupyter Notebook in version 4.0.5 was used and [this link contains the notebook used to create the model] (https://github.com/markoshlima/robbsntheftsphones/blob/main/notebooks/celulares-roubo-furto.ipynb).
 
 This site was built using [GitHub Pages].
 
@@ -28,8 +28,6 @@ In the figure below we can see the results of the 10 classes and each one with i
 
 # Addition Information & Setup
 
-- The backend: `myflix-hexagonal`is used to create all data in AWS Dynamodb and the backend rules.
-- The folder `graphql-config` there is the schema.graphql that could be used inside AWS AppSync
-- Also the same folder, there are the resolvers that could be used in the AWS tool as well
-- It is needed to created the dynamodb connectors
-- The folder `IaaC` there is the the infraestructure code to S3, ECS.
+- Run `/backend/bootstrap.sh` to run localhost or `/backend/bootstrap-docker.sh` to run it in Docker container
+- The folder `IaaC` there is the the infraestructure code for all components in AWS
+- The folder `data` contains the data used for training the model
