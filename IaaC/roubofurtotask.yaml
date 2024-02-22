@@ -1,0 +1,27 @@
+Type: AWS::ECS::TaskDefinition
+Properties: 
+  ContainerDefinitions:
+        - Name: roubofurto
+          Image: String
+          Essential: true
+          PortMappings:
+            - ContainerPort: 8080
+            - HostPort: 8080
+            - Protocol: tcp
+  Cpu: 1024
+  ExecutionRoleArn: String
+  Family: roubofurtotask
+  Memory: 4096
+  NetworkMode: awsvpc
+  ProxyConfiguration: 
+    ProxyConfiguration
+  RequiresCompatibilities: 
+    - FARGATE
+  RuntimePlatform: 
+    CpuArchitecture: X86_64
+    OperatingSystemFamily: LINUX
+  Tags: 
+    - Tag
+  TaskRoleArn: String
+  Volumes: 
+    - Volume

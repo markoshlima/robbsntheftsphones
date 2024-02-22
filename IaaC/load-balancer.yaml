@@ -1,0 +1,16 @@
+Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+Properties: 
+  IpAddressType: ipv4
+  LoadBalancerAttributes: 
+    - LoadBalancerAttribute
+  Name: roubofurtoalb
+  Scheme: internet-facing
+  SecurityGroups: 
+    - String
+  SubnetMappings: 
+    - SubnetMapping
+  Subnets: 
+    - String
+  Tags: 
+    - Tag
+  Type: application

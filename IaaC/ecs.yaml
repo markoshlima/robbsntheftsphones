@@ -1,0 +1,6 @@
+Type: AWS::ECS::Cluster
+Properties: 
+  CapacityProviders: 
+    - FARGATE
+    - FARGATE_SPOT
+  ClusterName: roubofurto

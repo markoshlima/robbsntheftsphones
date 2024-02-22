@@ -1,0 +1,34 @@
+Type: AWS::ECS::Service
+Properties: 
+  Cluster: String
+  DeploymentConfiguration: 
+    MaximumPercent: 200
+    MinimumHealthyPercent: 100
+  DeploymentController: 
+    Type: ECS
+  DesiredCount: 2
+  EnableECSManagedTags: true
+  EnableExecuteCommand: false
+  HealthCheckGracePeriodSeconds: 0
+  LaunchType: FARGATE
+  LoadBalancers: 
+    - ContainerPort: 8080
+    LoadBalancerName: String
+    TargetGroupArn: String
+  NetworkConfiguration: 
+    AwsvpcConfiguration:
+      AssignPublicIp: ENABLED
+      SecurityGroups: 
+        - String
+      Subnets: 
+        - String
+  PlatformVersion: LATEST
+  PropagateTags: NONE
+  Role: String
+  SchedulingStrategy: REPLICA
+  ServiceConnectConfiguration: 
+    ServiceConnectConfiguration
+  ServiceName: String
+  Tags: 
+    - Tag
+  TaskDefinition: String
