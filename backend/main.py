@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(app)
 
-model = pickle.load(bz2.BZ2File('../model/model.pbz2', 'rb'))
+model = pickle.load(bz2.BZ2File('./model.pbz2', 'rb'))
 
 @app.route('/predict', methods=['POST'])
 @cross_origin()
@@ -19,7 +19,7 @@ def predict():
 
     pred = pd.DataFrame([[input['bairro'], input['marca'], input['dia'], input['periodo'], input['idade'], input['sexo']]], columns=['BAIRRO', 'MARCA_OBJETO', 'DIA_SEMANA', 'PERIODO', 'IDADE', 'SEXO'])
 
-    base_add = pd.read_csv("../data/base_to_single_predict.csv")
+    base_add = pd.read_csv("./base_to_single_predict.csv")
     pred = pd.concat([base_add, pred])
 
     pred["BAIRRO"] = pred["BAIRRO"].astype("category")

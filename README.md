@@ -29,5 +29,5 @@ In the figure below we can see the results of the 10 classes and each one with i
 # Addition Information & Setup
 
 - Run `/backend/bootstrap.sh` to run localhost or `/backend/bootstrap-docker.sh` to run it in Docker container
-- The folder `IaaC` there is the the infraestructure code for all components in AWS
+- The folder `IaaC` there is the the infraestructure code for all components in AWS, it is needed to change some attributes about VPC (inside files) before run.
 - The folder `data` contains the data used for training the model
